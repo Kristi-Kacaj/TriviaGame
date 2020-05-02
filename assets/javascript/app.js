@@ -1,4 +1,5 @@
-const questions = [
+$(document).ready(function () {
+const triviaQuestions = [
     {
         question: "What does Sheldon's mom call him?",
         choices: ["Sheldon","Pumpkin", "Shelly", "Doc"],
@@ -31,3 +32,27 @@ let currQuestion = 0;
 let score = 0;
 let lost = 0;
 let timer;
+
+// Displays the question and choices 
+function getQuestions() {
+    const question = triviaQuestions[currQuestion].question;
+    const choices = triviaQuestions[currQuestion].choices;
+
+    $('#time').html('Timer: ' + countdown);
+    $('#game').html(`
+        <h4>${question}</h4>
+        ${getChoices(choices)}
+    `);
+    
+}
+
+function getChoices(choices) {
+    let result = '';
+    for (let i = 0; i < choices.length; i++) {
+        result += `<p class="choice" data-answer="${choices[i]}">${choices[i]}</p>`;
+    }
+    return result;
+}
+
+getQuestions();
+})
