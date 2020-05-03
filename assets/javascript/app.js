@@ -3,22 +3,22 @@ $(document).ready(function () {
 const triviaQuestions = [
     {
         question: "What does Sheldon's mom call him?",
-        choices: ["Sheldon","Pumpkin", "Shelly", "Doc"],
+        choices: ["Sheldon","Shelly", "Pumpkin", "Doc"],
         answer: "Shelly",
     },
     {
         question: "Who is the only member of the cast to hold a PhD in real life?",
-        choices: ["Jim Parsons", "Johnny Galecki", "Mayim Bialik", "Kaley Cuoco"],
+        choices: ["Mayim Bialik", "Johnny Galecki", "Jim Parsons", "Kaley Cuoco"],
         answer: "Mayim Bialik",
     },
     {
        question: "Where do Sheldon, Amy, Raj, Howard, and Leonard work?",
-       choices: ["Caltech", "UCLA", "USC", "Cal Poly"],
+       choices: ["USC", "UCLA", "Caltech", "Cal Poly"],
        answer: "Caltech",
     },
     {
         question: "Who officiates Sheldon and Amy's wedding?",
-        choices: ["Wil Wheaton", "Raj", "Mark Hamill", "Leonard"],
+        choices: ["Wil Wheaton", "Raj", "Leonard", "Mark Hamill"],
         answer: "Mark Hamill",
     },
     {
@@ -47,11 +47,11 @@ function nextQuestion() {
     }
 }
 
-//Stops timer at 0. Mover to next question when timer runs out.
+//Moves to next question when timer runs out.
 function timesUp() {
     clearInterval(timer);
     lost++;
-    nextQuestion();
+    setTimeout(nextQuestion, 3 * 1000);
 }
 
 //Starts a 15 second countdown
@@ -62,6 +62,9 @@ function countDown() {
 
     if (counter ===0) {
         timesUp();
+        $("#answerblock").html(`
+        <p>Time is up! The correct answer is <b>${answer}</b></p>
+        `);
     }
 }
 
@@ -77,6 +80,7 @@ function getQuestions() {
     $('#game').html(`
         <h4>${question}</h4>
         ${getChoices(choices)}
+        ${getRemainingQuestion()}
     `);
     
 }
@@ -100,12 +104,17 @@ $(document).on('click','.choice', function () {
     
     if (answer === chosenAnswer) {
         score++;
+        stop();
+        $("#answerblock").html("<p>BAZINGA!</p>");
         console.log('You win!');
-        nextQuestion();
+        setTimeout(nextQuestion, 3 * 1000);
     } else {
         lost++;
+        $("#answerblock").html(`
+        <p>Wrong Answer! The correct answer is <b>${answer}</b></p>
+        `);
         console.log('You lost!');
-        nextQuestion();
+        setTimeout(nextQuestion, 3 * 1000);
     }
 });
 
@@ -121,5 +130,29 @@ function displayResult() {
     $('#game').html(result);
 }
 
-getQuestions();
+//Resets the game
+$(document).on('click', '#reset', function() {
+    counter = 15;
+    currQuestion = 0;
+    score = 0;
+    lost = 0;
+    timer = null;
+
+    getQuestions();
+})
+
+//Displays the number of remaing questions in game
+function getRemainingQuestion() {
+    const remainingQuestion = triviaQuestions.length - (currQuestion + 1);
+    const totalQuestion = triviaQuestions.length;
+
+    return `Remaining Question: ${remainingQuestion}/${totalQuestion}`;
+}
+
+//Starts the game
+$('#start').click(function() {
+    $('#start').remove();
+    $('#start').html(counter);
+    getQuestions ();
+})
 })
