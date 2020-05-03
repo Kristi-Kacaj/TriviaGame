@@ -40,6 +40,7 @@ function nextQuestion() {
     const questionsOver = (triviaQuestions.length - 1) === currQuestion;
     if (questionsOver) {
         console.log('Game over!');
+        displayResult();
     } else{
     currQuestion++;
     getQuestions();
@@ -87,6 +88,37 @@ function getChoices(choices) {
         result += `<p class="choice" data-answer="${choices[i]}">${choices[i]}</p>`;
     }
     return result;
+}
+
+//Once answer is chosen, go tot the next question
+//Event Listener
+$(document).on('click','.choice', function () {
+    clearInterval(timer);
+    const chosenAnswer = $(this).attr('data-answer');
+    const answer = triviaQuestions[currQuestion].answer
+    console.log(chosenAnswer);
+    
+    if (answer === chosenAnswer) {
+        score++;
+        console.log('You win!');
+        nextQuestion();
+    } else {
+        lost++;
+        console.log('You lost!');
+        nextQuestion();
+    }
+});
+
+//Displays results of user once game is over
+function displayResult() {
+    const result = `
+        <p>You got ${score} question(s) right</p>
+        <p>You missed ${lost} question(s)</p>
+        <p>Total questions ${triviaQuestions.length} questions</p>
+        <button class="btn btn-primary" id="reset">Play Again!</button>
+    `;
+
+    $('#game').html(result);
 }
 
 getQuestions();
