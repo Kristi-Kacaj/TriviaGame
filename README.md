@@ -1,37 +1,16 @@
-## Welcome to GitHub Pages
+# The Big Bang Theory Trivia Game
 
-You can use the [editor on GitHub](https://github.com/Kristi-Kacaj/TriviaGame/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+[Big Bang Theory Trivia Game](https://kristi-kacaj.github.io/TriviaGame/)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+When you click **_Start Game_**, you will be given 5 multiple-choice questions about the show that only true fans would know! You have 15 seconds to answer per questions before time runs out. If you answer correctly, you'll see a **_Bazinga_** ; after a few seconds it will take you to the next question. If you answer incorrectly, it'll say **_Wrong Answer! The correct answer is ' '_** The remainaing amount of questions will be displayed at the buttom throughout the game. At the end of the game, you will be shown how many questions you got right, how many you got wrong, and the total amount of questions; and lastly, a **_Play Again!_** button to restart the trivia game.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Technology Used:
 
-```markdown
-Syntax highlighted code block
+- HTML
+- CSS
+- Bootstrap
+- Javascript
+- JQuery
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Kristi-Kacaj/TriviaGame/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+This trivia game was built using JavaScript for the logic and jQuery to manipulate HTML creating a solid layout with valid HTML and stylish CSS.
